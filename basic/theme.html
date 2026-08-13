@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/dist/styles.css">
+</head>
+<body>
+    <!-- Tailwind Dark Mode Documentation Reference -->
+    <!-- DOCUMENTATION: https://tailwindcss.com/docs/dark-mode -->
+
+    <!-- 
+      Tailwind's `dark:` variant checks if the `<html>` tag has a class of "dark".
+      If `<html class="dark">` exists, `dark:bg-black` overrides `bg-white`.
+    -->
+    <div class="bg-white h-[50dvh] p-10 dark:bg-black">
+        <h1 class="bg-blue-500 text-white font-bold p-5 dark:bg-blue-900">Hello to Theme</h1>
+
+        <!-- Button to manually invert the theme -->
+        <button 
+            class="bg-blue-500 text-white font-bold px-5 py-2 mt-5 dark:bg-blue-900" 
+            onclick="toggleTheme()">Toggle Theme
+        </button>
+
+        <!-- Button to clear manual selection and inherit system settings -->
+        <button 
+            class="bg-blue-500 text-white font-bold px-5 py-2 mt-5 dark:bg-blue-900" 
+            onclick="setToSystemTheme()">Use System Theme
+        </button>
+    </div>
+
+    <script>
+        /**
+         * 1. OS MEDIA QUERY MATCHER
+         * Checks if the OS/browser is set to dark mode.
+         */
+        const system = window.matchMedia('(prefers-color-scheme: dark)');
+
+        /**
+         * 2. RESOLVE ACTIVE THEME
+         * Returns 'dark' or 'light'. 
+         * Prioritizes `localStorage.theme`, falling back to system preference if null/undefined.
+         */
+        const theme = () => localStorage.theme || (system.matches ? "dark" : "light");
+
+        /**
+         * 3. DOM THEME APPLIER
+         * Updates the <html> element class list to trigger Tailwind's `dark:` utility styles.
+         * Default parameter evaluates `theme()` if no explicit theme is passed in.
+         */
+        function applyTheme(newTheme = theme()){
+            console.log(theme());
+            if(newTheme === "dark") document.documentElement.classList.add("dark");
+            else document.documentElement.classList.remove("dark");
+        }
+
+        /**
+         * 4. TOGGLE HANDLER
+         * Inverts current resolved theme, saves explicit preference to `localStorage`, 
+         * and updates the DOM.
+         */
+        function toggleTheme(){
+            localStorage.theme = theme() === "dark" ? "light" : "dark";
+            applyTheme(localStorage.theme);
+        }
+
+        /**
+         * 5. SYSTEM THEME RESET HANDLER
+         * Clears custom preference from `localStorage` and resets DOM back to match system scheme.
+         */
+        function setToSystemTheme(){
+            localStorage.removeItem("theme");
+            applyTheme();
+        }
+
+        /**
+         * 6. REAL-TIME OS LISTENER
+         * Listens for changes in system appearance (e.g. OS auto-switch).
+         * Only triggers if user has NOT set a custom `localStorage` override.
+         */
+        system.addEventListener("change", (event) => {
+            if(!localStorage.theme) applyTheme();
+        });
+
+        // 7. INITIALIZATION
+        // Runs immediately on script load to set the initial theme state.
+        applyTheme();        
+    </script>
+</body>
+</html>

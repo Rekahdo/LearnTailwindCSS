@@ -1,0 +1,22 @@
+Tailwind CSS Just-In-Time (JIT) Compiler Notes
+
+WHAT IT IS:
+The JIT engine generates CSS on demand by scanning template files as you write code, rather than pre-building a massive static CSS file.
+
+HOW IT WORKS:
+
+* Scans source files (e.g., .html, .jsx, .vue) for utility class names.
+* Dynamically compiles only the exact CSS rules detected in the markup.
+
+KEY ADVANTAGES:
+
+1. Ultra-Fast Builds: Instantaneous dev server startup and hot-reload.
+2. Arbitrary Values: Write custom one-off values directly in markup using bracket notation (e.g., top-[113px] or bg-[#1da1f2]).
+3. All Variants Active: Stack responsive, focus, hover, and state modifiers freely (e.g., sm:hover:active:opacity-75).
+4. Tiny Dev Stylesheet: Dev environment serves only used styles, keeping browser DevTools fast and clear.
+5. Dev/Prod Parity: Identical CSS generated across environments.
+
+GOLDEN RULE:
+
+* Never string-concatenate class names dynamically (e.g., bg-${color}-500).
+* Tailwind scans raw static text; write complete, unbroken class strings (e.g., color === 'blue' ? 'bg-blue-500' : 'bg-red-500').

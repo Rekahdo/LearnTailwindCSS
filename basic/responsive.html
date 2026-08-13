@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/dist/styles.css">
+</head>
+<body class="grid grid-cols-1 gap-6 md:my-5">
+    <!--
+        =============================================================================
+        TAILWIND CSS: MOBILE-FIRST APPROACH & BREAKPOINTS REFERENCE
+        =============================================================================
+
+        1. CORE PHILOSOPHY
+            - Tailwind CSS strictly follows a "Mobile-First" design system.
+            - Unprefixed utility classes (e.g., `text-center`, `p-4`, `flex-col`) 
+            apply to ALL screen sizes starting from mobile (smallest screens up).
+            - Responsive prefixes (e.g., `md:`, `lg:`) act as `@media (min-width: ...)` 
+            queries. They only trigger at that specific breakpoint and larger.
+
+        2. COMMON MISTAKE TO AVOID
+            - INCORRECT: Thinking `sm:p-4` means "apply 16px padding on small/mobile screens".
+            - CORRECT:   Use `p-4` for mobile base styles, then override with `md:p-8` 
+                        or `lg:p-12` as the viewport scales up.
+
+        3. DEFAULT BREAKPOINTS REFERENCE (MIN-WIDTH)
+            - (default) : Unprefixed -> Targets < 640px (Mobile view)
+            - sm:       : min-width: 640px  (Large phones / Small tablets)
+            - md:       : min-width: 768px  (Tablets / Small laptops)
+            - lg:       : min-width: 1024px (Laptops / Desktops)
+            - xl:       : min-width: 1280px (Large Desktop screens)
+            - 2xl:      : min-width: 1536px (Extra Large / 4K monitors)
+
+        4. PRACTICAL WORKFLOW EXAMPLE
+            <div class="w-full flex-col p-4 md:flex-row md:p-8 lg:p-12">
+                - Mobile (<640px): Full width, vertical flex layout, 16px padding.
+                - Tablet (>=768px): Horizontal flex layout, 32px padding.
+                - Desktop (>=1024px): Horizontal flex layout, 48px padding.
+            </div>
+
+        =============================================================================
+        =============================================================================
+        =============================================================================
+    -->
+    
+    <div class="bg-blue-300 grid grid-cols-1 gap-6 p-6 h-dvh md:grid-cols-2 lg:grid-cols-4 md:h-[400px] block">
+        <!--
+            RESPONSNESS BREAKDOWN FOR THIS CONTAINER:
+
+            • Base / Mobile View:
+                - Target Screen Width: 0px to 767px (min-width: 0px, max-width: 767px)
+                - grid-cols-1 : Stacks the 4 items vertically in a single column.
+                - h-[100dvh]  : Sets container height to fill 100% of the dynamic viewport height.
+
+            • Medium Screens (Tablet):
+                - Target Screen Width: 768px to 1023px (min-width: 768px, max-width: 1023px)
+                - md:grid-cols-2 : Rearranges child elements into 2 columns (2x2 grid).
+                - md:h-[400px]   : Overrides dynamic viewport height, locking height to 400px.
+
+            • Large Screens (Desktop and above):
+                - Target Screen Width: 1024px and up to infinity (min-width: 1024px, max-width: INFINITY)
+                - lg:grid-cols-4 : Expands layout into 4 columns side-by-side in a single row.
+                - Height remains 400px (inherited from md:h-[400px]).
+        -->
+
+        <div class="bg-blue-500"></div>
+        <div class="bg-orange-500"></div>
+        <div class="bg-green-500"></div>
+        <div class="bg-purple-500"></div>
+    </div>
+    
+    <div class="h-[100px] bg-purple-600 max-sm:bg-red-600 max-md:bg-green-600 max-lg:bg-blue-600">
+        <!-- 
+            TAILWIND CSS BREAKPOINT & VARIANT REFERENCE
+            =============================================================================
+
+            sm: 640px - 767px
+            min-sm: screen >= 640px  (Standard `sm:` — applies from 640px and up)
+            max-sm: screen < 640px   (Applies ONLY below 640px, i.e., @media (max-width: 639px))
+
+            md: 768px - 1023px
+            min-md: screen >= 768px  (Standard `md:` — applies from 768px and up)
+            max-md: screen < 768px   (Applies ONLY below 768px, i.e., @media (max-width: 767px))
+
+            lg: 1024px - 1279px
+            min-lg: screen >= 1024px (Standard `lg:` — applies from 1024px and up)
+            max-lg: screen < 1024px  (Applies ONLY below 1024px, i.e., @media (max-width: 1023px))
+
+            xl: 1280px - 1535px
+            min-xl: screen >= 1280px (Standard `xl:` — applies from 1280px and up)
+            max-xl: screen < 1280px  (Applies ONLY below 1280px, i.e., @media (max-width: 1279px))
+
+            2xl: 1536px and above
+            min-2xl: screen >= 1536px (Standard `2xl:` — applies from 1536px and up)
+            max-2xl: screen < 1536px  (Applies ONLY below 1536px, i.e., @media (max-width: 1535px))
+
+            =============================================================================
+            NOTE: `max-*` modifiers (like `max-md:hidden`) are built-in Tailwind v3.2+ 
+            utilities used to target screens strictly smaller than the given breakpoint.
+        -->
+    </div>
+</body>
+</html>

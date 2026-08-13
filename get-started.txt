@@ -1,0 +1,18 @@
+PostCSS Installation
+https://tailwindcss.com/docs/installation/using-postcss
+
+commands
+npm install tailwindcss @tailwindcss/postcss postcss postcss-cli
+
+add to package.json
+"scripts": {
+    "dev": "postcss styles.css -o dist/styles.css --watch"
+}
+
+run command
+npm run dev
+
+
+
+You can also visit shadcn ui
+https://ui.shadcn.com/
