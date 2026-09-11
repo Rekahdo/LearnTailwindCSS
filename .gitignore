@@ -1,0 +1,36 @@
+# Dependencies (ignores node_modules in root and all subfolders)
+**/node_modules/
+node_modules/
+
+# Build outputs
+**/dist/
+**/build/
+**/dist-ssr/
+dist/
+dist-ssr/
+
+# Logs
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment variables
+**/.env
+**/.env.local
+**/.env.*.local
+
+# Editor & System directories
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
